@@ -9,7 +9,9 @@ client.connect();
 console.log('connected to postgres');
 
 client.query('CREATE TABLE IF NOT EXISTS keyvalue (key VARCHAR(255) PRIMARY KEY, value json NOT NULL)', (err, res) => {
-  console.log(err, res);
+  if (!err) {
+    console.log('table created');
+  }
  
 })
 console.log('after create');
