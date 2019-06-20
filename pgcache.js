@@ -24,7 +24,11 @@ module.exports = {
 
 function get(key, callback) {
   client.query('SELECT * from keyvalue where key = $1', [key], (err, res) => {
-    callback(err, res.rows[0]);
+    if (!res.rows[0]) {
+      callback(null, null) 
+    } else {
+      callback(err, res.rows[0]);
+    }
   });
 }
 
