@@ -30,7 +30,7 @@ const client = new Client({
 
 client.connect();
 
-client.query("CREATE TABLE IF NOT EXISTS keyvalue (key NOT NULL PRIMARY KEY, value json NOT NULL')
+client.query('CREATE TABLE IF NOT EXISTS keyvalue (key NOT NULL PRIMARY KEY, value json NOT NULL')
 
 
 
