@@ -20,6 +20,19 @@ var myCache = cacheManager.caching({
     }
   });
 
+
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
+client.connect();
+
+client.query("CREATE TABLE IF NOT EXISTS keyvalue (key NOT NULL PRIMARY KEY, value json NOT NULL')
+
+
 var $q = require('q');
 
 module.exports = {
