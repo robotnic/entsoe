@@ -5,7 +5,7 @@
 //var cacheManager = require('cache-manager');
 //var myCache = cacheManager.caching({store: 'memory', max: 100, ttl: 10/*seconds*/});
 
-
+/*
 var cacheManager = require('cache-manager');
 var mongoStore = require('cache-manager-mongodb');
 
@@ -19,8 +19,9 @@ var myCache = cacheManager.caching({
       autoReconnect: true
     }
   });
+*/
 
-
+/*
 const { Client } = require('pg');
 
 const client = new Client({
@@ -31,6 +32,9 @@ const client = new Client({
 client.connect();
 
 client.query('CREATE TABLE IF NOT EXISTS keyvalue (key VARCHAR(255) NOT NULL PRIMARY KEY, value json NOT NULL')
+*/
+
+var myCache = request('./pgcache');
 
 
 
@@ -78,3 +82,4 @@ function get(hash, callback, params, refresh) {
 
   return q.promise;
 }
+
