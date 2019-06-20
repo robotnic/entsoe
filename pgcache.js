@@ -8,7 +8,7 @@ console.log('going to connect to postgres');
 client.connect();
 console.log('connected to postgres');
 
-client.query('CREATE TABLE IF NOT EXISTS keyvalue (key VARCHAR(255) NOT NULL PRIMARY KEY, value json NOT NULL', (err, res) => {
+client.query('CREATE TABLE IF NOT EXISTS keyvalue (key VARCHAR(255) PRIMARY KEY, value json NOT NULL)', (err, res) => {
   console.log(err, res);
  
 })
