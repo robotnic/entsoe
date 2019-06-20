@@ -28,7 +28,7 @@ function get(key, callback) {
     if (!res.rows[0]) {
       callback(null, null) 
     } else {
-      callback(err, res.rows[0]);
+      callback(err, res.rows[0].value);
     }
   });
 }
