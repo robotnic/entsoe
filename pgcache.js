@@ -33,7 +33,7 @@ function get(key, callback) {
 }
 
 function set(key, value) {
-  client.query('INSERT INTO (key, value) VALUES ($1, $2) ON CONFLICT (id) DO UPDATE SET key = $1, value = $2;', [key, value], (err, res) => {
+  client.query('INSERT INTO (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET key = $1, value = $2;', [key, value], (err, res) => {
     console.log(err);
   });
 }
