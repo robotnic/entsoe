@@ -34,7 +34,7 @@ client.connect();
 client.query('CREATE TABLE IF NOT EXISTS keyvalue (key VARCHAR(255) NOT NULL PRIMARY KEY, value json NOT NULL')
 */
 
-var myCache = require('./pgcache');
+var myCache = require('./pgcache.js');
 
 
 
