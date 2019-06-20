@@ -33,7 +33,7 @@ function get(key, callback) {
 }
 
 function set(key, value) {
-  client.query('INSERT into (key, value values ($1, $2)', [key, value], (err, res) => {
+  client.query('INSERT into (key, value) values ($1, $2)', [key, value], (err, res) => {
     console.log(err);
   });
 }
