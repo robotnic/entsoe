@@ -32,9 +32,8 @@ function get(key, callback) {
   });
 }
 
-function set(key, value, callback) {
+function set(key, value) {
   client.query('INSERT into (key, value values ($1, $2)', [key, value], (err, res) => {
-    callback(err, res);
-    console.log(err, res);
+    console.log(err);
   });
 }
