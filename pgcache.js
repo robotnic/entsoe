@@ -7,7 +7,9 @@ const client = new Client({
 
 client.connect();
 
-client.query('CREATE TABLE IF NOT EXISTS keyvalue (key VARCHAR(255) NOT NULL PRIMARY KEY, value json NOT NULL')
+client.query('CREATE TABLE IF NOT EXISTS keyvalue (key VARCHAR(255) NOT NULL PRIMARY KEY, value json NOT NULL', (err, res) => {
+  console.log(err, res);
+})
 
 module.exports = {
   get: get,
@@ -17,13 +19,13 @@ module.exports = {
 
 function get(key) {
   client.query('SELECT * from keyvalue where key = $1', [key], (err, res) => {
-
+    console.log(err, res);
   });
 }
 
 function set(key, value, callback) {
   client.query('INSERT into (key, value values ($1, $2)', [key], (err, res) => {
     callback(err, res);
-    console.log(res);
+    console.log(err, res);
   });
 }
