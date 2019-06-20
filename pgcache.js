@@ -24,13 +24,12 @@ module.exports = {
 
 function get(key, callback) {
   client.query('SELECT * from keyvalue where key = $1', [key], (err, res) => {
-    callback(err, res);
-    console.log(err, res);
+    callback(err, res.rows[0]);
   });
 }
 
 function set(key, value, callback) {
-  client.query('INSERT into (key, value values ($1, $2)', [key], (err, res) => {
+  client.query('INSERT into (key, value values ($1, $2)', [key, value], (err, res) => {
     callback(err, res);
     console.log(err, res);
   });
