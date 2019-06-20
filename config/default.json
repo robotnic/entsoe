@@ -1,0 +1,151 @@
+{
+  "Hydro Pumped Storage": {
+    "color": "lightgreen",
+    "minpower": -1.9,
+    "min": -1.9,
+    "maxpower": 3.4,
+    "max": 3.4,
+    "type": "pump",
+    "energyprice":"60",
+    "efficiency":0.85
+  },
+   "Curtailment": {
+    "color": "black",
+    "type": "loss",
+    "energyprice":"0",
+    "power":0,
+    "min":-999999999,
+    "max":0
+  },
+  "Power2Gas": {
+    "color": "pink",
+    "type": "loss",
+    "maxstorage":40000,
+    "energyprice":"5",
+    "minpower":-2,
+    "min":-10,
+    "max":0,
+    "power":0,
+    "efficiency":0.7
+ 
+  },
+  "Hydro Run-of-river and poundage": {
+    "color": "#00aaff",
+    "type": "renewable"
+  },
+  "Nuclear": {
+    "color": "gold",
+    "type": "fossil"
+  },
+ 
+  "Fossil Brown coal/Lignite": {
+    "color": "brown",
+    "type": "fossil"
+  },
+ 
+  "Fossil Hard coal": {
+    "color": "black",
+    "type": "fossil",
+    "co2": "1000",
+    "energyprice":"6.35"
+  },
+  "Fossil Oil": {
+    "color": "darkbrown",
+    "type": "fossil"
+  },
+  "Fossil Gas": {
+    "color": "red",
+    "type": "fossil",
+    "co2": "500",
+    "energyprice":"30",
+    "minpower":0,
+    "efficiency":0.5
+  },
+  "Biomass": {
+    "color": "#f4a460",
+    "type": "renewable",
+    "min":0,
+    "max":2,
+    "energyprice":"120"
+
+  },
+  "Wind Onshore": {
+    "color": "#add8e6",
+    "type": "renewable",
+    "energyprice":"47.3",
+    "pricesource":"https://www.pv-magazine.de/2018/02/21/sternstunde-der-photovoltaik-auf-augenhoehe-mit-wind-und-kohlestrom/"
+
+  },
+  "Wind Offshore": {
+    "color": "#ada8e6",
+    "type": "renewable",
+    "energyprice":"47.3",
+    "pricesource":"https://www.pv-magazine.de/2018/02/21/sternstunde-der-photovoltaik-auf-augenhoehe-mit-wind-und-kohlestrom/"
+
+  },
+  
+  "Other": {
+    "color": "pink",
+    "type": "unknown"
+  },
+ 
+  "Other renewable": {
+    "color": "#00ff00",
+    "type": "renewable"
+  },
+  "Geothermal": {
+    "color": "#ff99ff",
+    "type": "renewable"
+  },
+  "Hydro Water Reservoir": {
+    "color": "purple",
+    "minpower": 0,
+    "min": 0,
+    "maxpower": 2,
+    "max": 2,
+    "type": "storage"
+  },
+  "Solar": {
+    "color": "gold",
+    "type": "renewable",
+    "energyprice":"43",
+    "pricesource":"https://www.pv-magazine.de/2018/02/21/sternstunde-der-photovoltaik-auf-augenhoehe-mit-wind-und-kohlestrom/"
+
+  },
+  "Waste": {
+    "color": "aqua",
+    "type": "chemical"
+  },
+  "Andere": {
+    "color": "lightgrey",
+    "type": "fossil"
+  },
+
+  "Transport": {
+    "color":"red",
+    "type":"fossil",
+    "co2":"1500",
+    "energyprice":50,
+    "power":4
+  },
+  "Import": {
+    "color":"grey",
+    "type":"",
+    "co2":"1500",
+    "energyprice":50,
+    "power":0
+  },
+   "Export": {
+    "color":"pink",
+    "type":"",
+    "co2":"1500",
+    "energyprice":50,
+    "power":0
+  },
+ 
+
+  "Leistung [MW]": {
+    "color": "black",
+    "type": "total"
+  }
+}
