@@ -22,7 +22,7 @@ function get(key) {
 }
 
 function set(key, value, callback) {
-  client.query('INSERT into (key, value values ($1, $2);, [key], (err, res) => {
+  client.query('INSERT into (key, value values ($1, $2)', [key], (err, res) => {
     callback(err, res);
     console.log(res);
   });
