@@ -6,6 +6,7 @@
   "dependencies": {
     "cache-manager-mongodb": "^0.2.1",
     "express": "^4.17.1",
+    "md5": "^2.2.1",
     "moment": "^2.24.0",
     "node-libxml": "^3.2.5",
     "q": "^1.5.1",
