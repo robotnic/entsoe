@@ -34,8 +34,9 @@ function get(key, callback) {
 }
 
 function set(key, value) {
-  console.log('SET', key, value);
-  client.query('INSERT INTO (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET key = $1, value = $2;', [key, value], (err, res) => {
+  var query = 'INSERT INTO (key, value) VALUES ($1, $2) ON DUPLICATE KEY DO UPDATE SET value = $2'
+  console.log('SET', query);
+  client.query(query, [key, value], (err, res) => {
     console.log(err);
   });
 }
