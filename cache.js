@@ -33,6 +33,7 @@ client.connect();
 client.query("CREATE TABLE IF NOT EXISTS keyvalue (key NOT NULL PRIMARY KEY, value json NOT NULL')
 
 
+
 var $q = require('q');
 
 module.exports = {
