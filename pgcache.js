@@ -17,8 +17,9 @@ module.exports = {
 }
 
 
-function get(key) {
+function get(key, callback) {
   client.query('SELECT * from keyvalue where key = $1', [key], (err, res) => {
+    callback(err, res);
     console.log(err, res);
   });
 }
