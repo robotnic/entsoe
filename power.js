@@ -176,7 +176,7 @@ function load(start, end, area) {
             } else {
               typeObj = powerObj[psrType];
               values.forEach((item, i) => {
-                if (typeObj.values[i]) {
+                if (!isNaN(typeObj.values[i])) {
                   typeObj.values[i].y -= item.y;
                 }
               })
@@ -186,7 +186,7 @@ function load(start, end, area) {
         let values = [];
         powerArray.forEach(item => {
           item.values.forEach((value, i) => {
-            if (!values[i]) {
+            if (!isNaN(values[i])) {
               values[i] = {
                 x: value.x,
                 y: 0
