@@ -57,6 +57,7 @@ app.get('/api/generated', function(req, res) {
   var hash = 'generated-' + country + '-' + start + '-' + end;
 
   cache.get(hash, power.load,[start, end, country], refresh === 'true').then(function(charts){
+    console.log('return from cache');
     //var etag = req.headers['if-none-match']
     var md = md5(charts);
     res.set('etag', md);
