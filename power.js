@@ -186,7 +186,7 @@ function load(start, end, area) {
         let values = [];
         powerArray.forEach(item => {
           item.values.forEach((value, i) => {
-            if (!isNaN(values[i])) {
+            if (!isNaN(value.y)) {
               values[i] = {
                 x: value.x,
                 y: 0
@@ -194,7 +194,7 @@ function load(start, end, area) {
 	      values[i].y += value.y;
             }
           })
-console.log(item.key, values.length);
+          console.log(item.key, values.length);
         })
         totalLoad(start, end, area).then(data => {
           console.log('startend', start, end, area);
