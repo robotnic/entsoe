@@ -188,12 +188,12 @@ console.log('typeObj', typeObj.key, values.length);
         let values = [];
         powerArray.forEach(item => {
           item.values.forEach((value, i) => {
+            values[i] = {
+              x: value.x,
+              y: 0
+            }
             if (!isNaN(value.y)) {
-              values[i] = {
-                x: value.x,
-                y: 0
-              }
-	      values[i].y += value.y;
+              values[i].y += value.y;
             }
           })
           console.log(item.key, values.length);
