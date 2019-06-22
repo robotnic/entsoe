@@ -176,7 +176,7 @@ function load(start, end, area) {
             } else {
               typeObj = powerObj[psrType];
               values.forEach((item, i) => {
-                if (!isNaN(typeObj.values[i])) {
+                if (!isNaN(item.y) {
                   typeObj.values[i].y -= item.y;
                 }
               })
