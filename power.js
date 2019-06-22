@@ -152,7 +152,7 @@ function load(start, end, area) {
             //var time = new Date(start).getTime();
             haveAlready.push(psrType);
             var values = [];
-console.log(constants.PsrType[psrType], type.Period[0].Point.length);
+console.log('111', constants.PsrType[psrType], type.Period[0].Point.length);
             type.Period[0].Point.forEach(item => {
               values.push({
                 x: time.unix() * 1000,
