@@ -59,9 +59,10 @@ app.get('/api/generated', function(req, res) {
   cache.get(hash, power.load,[start, end, country], refresh === 'true').then(function(charts){
     console.log('return from cache', charts);
     //var etag = req.headers['if-none-match']
-    
-    var md = md5(charts);
-    res.set('etag', md);
+    if (charts) { 
+      var md = md5(charts);
+      res.set('etag', md);
+    }
     res.send(charts);
     var delta = new Date().getTime() - startTime;
     console.log(delta + ' ms');
