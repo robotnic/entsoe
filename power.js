@@ -194,6 +194,7 @@ function load(start, end, area) {
             }
             values[i].y += value.y;
           })
+console.log(item.key, values.length);
         })
         totalLoad(start, end, area).then(data => {
           console.log('startend', start, end, area);
