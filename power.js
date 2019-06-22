@@ -117,12 +117,15 @@ function load(start, end, area) {
       console.log(error);
       q.resolve(null);
     } else {
+      console.log('got result');
       parseString(xml, function(err, result) {
+        console.log('not good result');
         if (!result['GL_MarketDocument']) {
           q.resolve(result["Acknowledgement MarketDocument"]);
           return;
         }
         var timeSeries = result['GL_MarketDocument'].TimeSeries;
+	console.log('have timeSeries');
         var haveAlready = [];
         var powerArray = [];
         seriesIndex = 0;
