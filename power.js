@@ -115,6 +115,7 @@ function load(start, end, area) {
   request.get(url, function(error, response, xml) {
     if (error) {
       console.log(error);
+      q.resolve(null);
     } else {
       parseString(xml, function(err, result) {
         if (!result['GL_MarketDocument']) {
