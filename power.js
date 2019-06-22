@@ -178,7 +178,7 @@ console.log('111', constants.PsrType[psrType], type.Period[0].Point.length);
               typeObj = powerObj[psrType];
 console.log('typeObj', typeObj.key, values.length);
               values.forEach((item, i) => {
-                if (item && item.y && !isNaN(item.y)) {
+                if (typeObj.values[i]) {
                   typeObj.values[i].y -= item.y || 0;
                 }
               })
