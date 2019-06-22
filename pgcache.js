@@ -34,9 +34,11 @@ function get(key, callback) {
 }
 
 function set(key, value) {
-  var query = 'INSERT INTO keyvalue (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = $2'
-  console.log('SET', query, key);
-  client.query(query, [key, JSON.stringify(value)], (err, res) => {
-    console.log(err);
-  });
+  if (value) {
+    var query = 'INSERT INTO keyvalue (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = $2'
+    console.log('SET', query, key);
+    client.query(query, [key, JSON.stringify(value)], (err, res) => {
+      console.log(err);
+    });
+  }
 }
