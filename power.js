@@ -175,7 +175,7 @@ function load(start, end, area) {
               powerArray.push(typeObj);
             } else {
               typeObj = powerObj[psrType];
-console.log('typeObj', typeObj);
+console.log('typeObj', typeObj.key, values.length);
               values.forEach((item, i) => {
                 if (!isNaN(item.y)) {
                   typeObj.values[i].y -= item.y;
