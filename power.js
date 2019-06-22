@@ -191,8 +191,8 @@ function load(start, end, area) {
                 x: value.x,
                 y: 0
               }
+	      values[i].y += value.y;
             }
-            values[i].y += value.y;
           })
 console.log(item.key, values.length);
         })
