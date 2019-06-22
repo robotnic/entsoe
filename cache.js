@@ -76,6 +76,7 @@ function get(hash, callback, params, refresh) {
   function getData() {
     callback.apply(this, params).then(data => {
       myCache.set(hash, data);
+      if(!data) data = null;
       q.resolve(data);
     })
   }
