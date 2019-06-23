@@ -196,7 +196,7 @@ function sortValues(values) {
   var ar = [];
   for(let v in values) {
     var item = {
-      x: moment(v).unix(),
+      x: moment(v).unix() * 1000,
       y: values[v]
     }
     ar.push(item); 
