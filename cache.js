@@ -2,8 +2,8 @@
 //const NodeCache = require( "node-cache" );
 //const myCache = new NodeCache();
 
-//var cacheManager = require('cache-manager');
-//var myCache = cacheManager.caching({store: 'memory', max: 100, ttl: 10/*seconds*/});
+var cacheManager = require('cache-manager');
+var myCache = cacheManager.caching({store: 'memory', max: 100, ttl: 10/*seconds*/});
 
 /*
 var cacheManager = require('cache-manager');
@@ -34,7 +34,7 @@ client.connect();
 client.query('CREATE TABLE IF NOT EXISTS keyvalue (key VARCHAR(255) NOT NULL PRIMARY KEY, value json NOT NULL')
 */
 
-var myCache = require('./pgcache');
+//var myCache = require('./pgcache');
 
 
 

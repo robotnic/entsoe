@@ -119,32 +119,32 @@ function load(start, end, area) {
     } else {
       console.log('got result');
       parseString(xml, function(err, result) {
-        console.log('not good result');
         if (!result['GL_MarketDocument']) {
+          console.log('not good result');
           q.resolve(result["Acknowledgement MarketDocument"]);
           return;
         }
         var timeSeries = result['GL_MarketDocument'].TimeSeries;
-	console.log('have timeSeries');
+        console.log('have timeSeries');
         var haveAlready = [];
         var powerArray = [];
         seriesIndex = 0;
         var powerObj = {};
-        var startDate = timeSeries[0].Period[0].timeInterval[0].start[0];
-        var resolution = timeSeries[0].Period[0].resolution[0];
-        var delta = 0;
-        switch (resolution) {
-          case 'PT15M':
-            delta = 15;
-            break;
-          case 'PT30M':
-            delta = 30;
-            break;
-          case 'PT60M':
-            delta = 60;
-            break;
-        }
         timeSeries.forEach((type, i) => {
+          var startDate = timeSeries[0].Period[0].timeInterval[0].start[0];
+          var resolution = timeSeries[0].Period[0].resolution[0];
+          var delta = 0;
+          switch (resolution) {
+            case 'PT15M':
+              delta = 15;
+              break;
+            case 'PT30M':
+              delta = 30;
+              break;
+            case 'PT60M':
+              delta = 60;
+              break;
+          }
           var psrType = type.MktPSRType[0].psrType[0];
           if (true || haveAlready.indexOf(psrType) === -1) {
             var time = moment(new Date(startDate));
@@ -152,7 +152,7 @@ function load(start, end, area) {
             //var time = new Date(start).getTime();
             haveAlready.push(psrType);
             var values = [];
-console.log('111', constants.PsrType[psrType], type.Period[0].Point.length);
+            console.log('111', constants.PsrType[psrType], type.Period[0].Point.length);
             type.Period[0].Point.forEach(item => {
               values.push({
                 x: time.unix() * 1000,
@@ -176,15 +176,16 @@ console.log('111', constants.PsrType[psrType], type.Period[0].Point.length);
               powerArray.push(typeObj);
             } else {
               typeObj = powerObj[psrType];
-console.log('typeObj', typeObj.key, values.length);
+              console.log('else', typeObj.key, values.length);
               values.forEach((item, i) => {
-                if (typeObj.values[i]) {
-                  typeObj.values[i].y -= item.y || 0;
-                }
+                console.log(i);
+                typeObj.values.push(item);
               })
             }
+            console.log('222', constants.PsrType[psrType], type.Period[0].Point.length);
           }
         })
+        /*
         let values = [];
         powerArray.forEach(item => {
           item.values.forEach((value, i) => {
@@ -198,9 +199,13 @@ console.log('typeObj', typeObj.key, values.length);
           })
           console.log(item.key, values.length);
         })
+        */
         totalLoad(start, end, area).then(data => {
           console.log('startend', start, end, area);
           powerArray.push(data);
+          powerArray.forEach(item => {
+            console.log(333, item.key, item.values.length);
+          })
           q.resolve(powerArray);
         })
       });
