@@ -130,8 +130,10 @@ function load(start, end, area) {
         var powerArray = [];
         seriesIndex = 0;
         var powerObj = {};
+        var time = null;
         timeSeries.forEach((type, i) => {
           var startDate = timeSeries[0].Period[0].timeInterval[0].start[0];
+          console.log('startDate', startDate);
           var resolution = timeSeries[0].Period[0].resolution[0];
           var delta = 0;
           switch (resolution) {
@@ -146,43 +148,42 @@ function load(start, end, area) {
               break;
           }
           var psrType = type.MktPSRType[0].psrType[0];
-          if (true || haveAlready.indexOf(psrType) === -1) {
-            var time = moment(new Date(startDate));
-            //                  var start = type.Period[0].timeInterval[0].start[0];
-            //var time = new Date(start).getTime();
-            haveAlready.push(psrType);
-            var values = [];
-            console.log('111', constants.PsrType[psrType], type.Period[0].Point.length);
-            type.Period[0].Point.forEach(item => {
-              values.push({
-                x: time.unix() * 1000,
-                y: parseInt(item.quantity[0]) / 1000
-              })
-              time.add(delta, 'm');
+          if (haveAlready.indexOf(psrType) === -1) {
+            time = moment(new Date(startDate));
+          }
+          //                  var start = type.Period[0].timeInterval[0].start[0];
+          //var time = new Date(start).getTime();
+          haveAlready.push(psrType);
+          var values = [];
+          console.log('111', constants.PsrType[psrType], type.Period[0].Point.length);
+          type.Period[0].Point.forEach(item => {
+            values.push({
+              x: time.unix() * 1000,
+              y: parseInt(item.quantity[0]) / 1000
             })
-            if (!powerObj[psrType]) {
-              var typeObj = {
-                key: constants.PsrType[psrType],
-                originalKey: constants.PsrType[psrType],
-                type: 'area',
-                seriesIndex: seriesIndex++,
-                country: area,
-                start: start,
-                end: end,
-                resolution: resolution,
-                values: values
-              }
-              powerObj[psrType] = typeObj;
-              powerArray.push(typeObj);
-            } else {
-              typeObj = powerObj[psrType];
-              console.log('else', typeObj.key, values.length);
-              values.forEach((item, i) => {
-                console.log(i);
-                typeObj.values.push(item);
-              })
+            time.add(delta, 'm');
+          })
+          if (!powerObj[psrType]) {
+            var typeObj = {
+              key: constants.PsrType[psrType],
+              originalKey: constants.PsrType[psrType],
+              type: 'area',
+              seriesIndex: seriesIndex++,
+              country: area,
+              start: start,
+              end: end,
+              resolution: resolution,
+              values: values
             }
-            console.log('222', constants.PsrType[psrType], type.Period[0].Point.length);
+            powerObj[psrType] = typeObj;
+            powerArray.push(typeObj);
+          } else {
+            typeObj = powerObj[psrType];
+            console.log('else', typeObj.key, values.length);
+            values.forEach((item, i) => {
+              console.log(typeObj.values.length);
+              typeObj.values.push(item);
+            })
           }
         })
         /*
@@ -205,6 +206,9 @@ function load(start, end, area) {
           powerArray.push(data);
           powerArray.forEach(item => {
             console.log(333, item.key, item.values.length);
+            item.values.forEach((tick, i) => {
+              console.log(i, new Date(tick.x));
+            })
           })
           q.resolve(powerArray);
         })
