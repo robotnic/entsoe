@@ -167,7 +167,7 @@ function parseTimeSeries(timeSeries, area, start, end) {
       var t = time.utc().format();
       time.add(delta, 'm');
       if (!all[type][t]) {
-        all[type][t] = point.quantity[0] * sign;
+        all[type][t] = point.quantity[0] * sign / 1000;
       }
     })
   })
