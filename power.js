@@ -15,13 +15,12 @@ var ch = '10YCH-SWISSGRIDZ';
 
 var country = austria
 
-var seriesIndex = 0;
 
 module.exports = {
   load: load
 }
 
-function totalLoad(start, end, area) {
+function totalLoad(start, end, area, seriesIndex) {
   var q = $q.defer();
   var params = {
     securityToken: token,
@@ -125,7 +124,7 @@ function load(start, end, area) {
 
         var timeSeries = result['GL_MarketDocument'].TimeSeries;
         var powerArray = parseTimeSeries(timeSeries, area, start, end);
-       totalLoad(start, end, area).then(data => {
+       totalLoad(start, end, area, powerArray.length).then(data => {
           console.log('startend', start, end, area);
           powerArray.push(data);
           /*
