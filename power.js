@@ -117,103 +117,115 @@ function load(start, end, area) {
       console.log(error);
       q.resolve(null);
     } else {
-      console.log('got result');
       parseString(xml, function(err, result) {
         if (!result['GL_MarketDocument']) {
-          console.log('not good result');
           q.resolve(result["Acknowledgement MarketDocument"]);
           return;
         }
+
         var timeSeries = result['GL_MarketDocument'].TimeSeries;
-        console.log('have timeSeries');
-        var haveAlready = [];
-        var powerArray = [];
-        seriesIndex = 0;
-        var powerObj = {};
-        var time = null;
-        timeSeries.forEach((type, i) => {
-          var startDate = timeSeries[0].Period[0].timeInterval[0].start[0];
-          console.log('startDate', startDate);
-          var resolution = timeSeries[0].Period[0].resolution[0];
-          var delta = 0;
-          switch (resolution) {
-            case 'PT15M':
-              delta = 15;
-              break;
-            case 'PT30M':
-              delta = 30;
-              break;
-            case 'PT60M':
-              delta = 60;
-              break;
-          }
-          var psrType = type.MktPSRType[0].psrType[0];
-          if (haveAlready.indexOf(psrType) === -1) {
-            time = moment(new Date(startDate));
-          }
-          //                  var start = type.Period[0].timeInterval[0].start[0];
-          //var time = new Date(start).getTime();
-          haveAlready.push(psrType);
-          var values = [];
-          console.log('111', constants.PsrType[psrType], type.Period[0].Point.length);
-          type.Period[0].Point.forEach(item => {
-            values.push({
-              x: time.unix() * 1000,
-              y: parseInt(item.quantity[0]) / 1000
-            })
-            time.add(delta, 'm');
-          })
-          if (!powerObj[psrType]) {
-            var typeObj = {
-              key: constants.PsrType[psrType],
-              originalKey: constants.PsrType[psrType],
-              type: 'area',
-              seriesIndex: seriesIndex++,
-              country: area,
-              start: start,
-              end: end,
-              resolution: resolution,
-              values: values
-            }
-            powerObj[psrType] = typeObj;
-            powerArray.push(typeObj);
-          } else {
-            typeObj = powerObj[psrType];
-            console.log('else', typeObj.key, values.length);
-            values.forEach((item, i) => {
-              console.log(typeObj.values.length);
-              typeObj.values.push(item);
-            })
-          }
-        })
-        /*
-        let values = [];
-        powerArray.forEach(item => {
-          item.values.forEach((value, i) => {
-            values[i] = {
-              x: value.x,
-              y: 0
-            }
-            if (!isNaN(value.y)) {
-              values[i].y += value.y;
-            }
-          })
-          console.log(item.key, values.length);
-        })
-        */
-        totalLoad(start, end, area).then(data => {
+        var powerArray = parseTimeSeries(timeSeries, area, start, end);
+       totalLoad(start, end, area).then(data => {
           console.log('startend', start, end, area);
           powerArray.push(data);
+          /*
           powerArray.forEach(item => {
             console.log(333, item.key, item.values.length);
             item.values.forEach((tick, i) => {
               console.log(i, new Date(tick.x));
             })
           })
+          */
           q.resolve(powerArray);
         })
       });
     }
   })
   return q.promise;
+}
+
+function parseTimeSeries(timeSeries, area, start, end) {
+  var all = {};
+  timeSeries.forEach(period => {
+    var type = constants.PsrType[period.MktPSRType[0].psrType[0]];
+    var sign = 1;
+    if (period['outBiddingZone_Domain.mRID']) {
+      sign = -1;
+    }
+    if (!all[type]) {
+      all[type] = {};
+    }
+    //console.log('-----------------------', type, '----------------');
+    var interval = period.Period[0];
+    var startTime = interval.timeInterval[0].start[0];
+    var time = moment(startTime);
+    var resolution = interval.resolution[0];
+    var delta = deltaTime(resolution);
+    //console.log(start, resolution, deltaTime(resolution));
+    interval.Point.forEach((point, i) => {
+      //      console.log(point.quantity[0]);
+      var t = time.utc().format();
+      time.add(delta, 'm');
+      if (!all[type][t]) {
+        all[type][t] = point.quantity[0] * sign;
+      }
+    })
+  })
+  var charts = [];
+  for (let a in all) {
+    var chart = makeChart(a, all[a], charts.length, area, start, end);
+    charts.push(chart);
+  }
+  return charts;
+}
+
+function makeChart(name, values, seriesIndex, area, start, end) {
+  var typeObj = {
+    key: name,
+    originalKey: name,
+    type: 'area',
+    seriesIndex: seriesIndex,
+    country: area,
+    start: start,
+    end: end,
+    values: sortValues(values)
+  }
+  return typeObj;
+}
+
+function sortValues(values) {
+  var ar = [];
+  for(let v in values) {
+    var item = {
+      x: moment(v).unix(),
+      y: values[v]
+    }
+    ar.push(item); 
+  }
+  ar = ar.sort((a, b) => {
+    if (a.x < b.x) {
+      return -1;
+    }
+    if (a.x > b.x) {
+      return 1;
+    }
+    return 0;
+  })
+  return ar;
+}
+
+function deltaTime(resolution) {
+  switch (resolution) {
+    case 'PT15M':
+      delta = 15;
+      break
+    case 'PT30M':
+      delta = 30;
+      break
+    case 'PT60M':
+      delta = 60;
+      break
+  }
+  return delta;
+
 }
