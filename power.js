@@ -72,6 +72,7 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
         if (factor === 4) {
           resolution = 'PT60M';
         }
+        console.log('resolution', resolution);
         var count = 0;
         timeSeries[0].Period[0].Point.forEach(item => {
           //console.log(count, factor, count % factor);
