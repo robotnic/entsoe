@@ -172,13 +172,13 @@ function parseTimeSeries(timeSeries, area, start, end) {
   })
   var charts = [];
   for (let a in all) {
-    var chart = makeChart(a, all[a], charts.length, area, start, end);
+    var chart = makeChart(a, all[a], charts.length, area, start, end, resolution);
     charts.push(chart);
   }
   return charts;
 }
 
-function makeChart(name, values, seriesIndex, area, start, end) {
+function makeChart(name, values, seriesIndex, area, start, end, resolution) {
   var typeObj = {
     key: name,
     originalKey: name,
@@ -187,6 +187,7 @@ function makeChart(name, values, seriesIndex, area, start, end) {
     country: area,
     start: start,
     end: end,
+    resolution: resolution,
     values: sortValues(values)
   }
   return typeObj;
