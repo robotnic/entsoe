@@ -81,6 +81,7 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
               x: time.unix() * 1000,
               y: parseInt(item.quantity[0]) / 1000
             })
+            console.log(values.length);
           }
           count++;
           time.add(delta, 'm');
