@@ -74,7 +74,7 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
         }
         var count = 0;
         timeSeries[0].Period[0].Point.forEach(item => {
-          console.log(count, factor, count % factor);
+          //console.log(count, factor, count % factor);
           if (count % factor === 0) {
             console.log('drin', count);
             values.push({
