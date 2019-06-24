@@ -68,11 +68,16 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
         var values = [];
         var l = timeSeries[0].Period[0].Point.length;
         console.log('l', l, 'numberOfPoints', numberOfPoints);
+        var factor = l / numberOfPoints;
+        var count = 0;
         timeSeries[0].Period[0].Point.forEach(item => {
-          values.push({
-            x: time.unix() * 1000,
-            y: parseInt(item.quantity[0]) / 1000
-          })
+          if (count % factor === 0) {
+            values.push({
+              x: time.unix() * 1000,
+              y: parseInt(item.quantity[0]) / 1000
+            })
+          }
+          count++;
           time.add(delta, 'm');
         })
         var power = {
