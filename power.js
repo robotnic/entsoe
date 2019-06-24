@@ -140,16 +140,7 @@ function load(start, end, area) {
         var timeSeries = result['GL_MarketDocument'].TimeSeries;
         var powerArray = parseTimeSeries(timeSeries, area, start, end);
         totalLoad(start, end, area, powerArray.length, powerArray[0].values.length).then(data => {
-          console.log('startend', start, end, area);
           powerArray.push(data);
-          /*
-          powerArray.forEach(item => {
-            console.log(333, item.key, item.values.length);
-            item.values.forEach((tick, i) => {
-              console.log(i, new Date(tick.x));
-            })
-          })
-          */
           q.resolve(powerArray);
         })
       });
