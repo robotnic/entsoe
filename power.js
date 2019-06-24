@@ -71,8 +71,9 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
         var factor = l / numberOfPoints;
         var count = 0;
         timeSeries[0].Period[0].Point.forEach(item => {
-          console.log(count, factor, coutn % factor);
+          console.log(count, factor, count % factor);
           if (count % factor === 0) {
+            console.log('drin', count);
             values.push({
               x: time.unix() * 1000,
               y: parseInt(item.quantity[0]) / 1000
