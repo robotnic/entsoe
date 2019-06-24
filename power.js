@@ -145,6 +145,7 @@ function load(start, end, area) {
 
 function parseTimeSeries(timeSeries, area, start, end) {
   var all = {};
+  var resolution = null;
   timeSeries.forEach(period => {
     var type = constants.PsrType[period.MktPSRType[0].psrType[0]];
     var sign = 1;
@@ -158,7 +159,7 @@ function parseTimeSeries(timeSeries, area, start, end) {
     var interval = period.Period[0];
     var startTime = interval.timeInterval[0].start[0];
     var time = moment(startTime);
-    var resolution = interval.resolution[0];
+    resolution = interval.resolution[0];
     var delta = deltaTime(resolution);
     //console.log(start, resolution, deltaTime(resolution));
     interval.Point.forEach((point, i) => {
