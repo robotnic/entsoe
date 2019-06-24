@@ -20,7 +20,7 @@ module.exports = {
   load: load
 }
 
-function totalLoad(start, end, area, seriesIndex) {
+function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
   var q = $q.defer();
   var params = {
     securityToken: token,
@@ -66,6 +66,8 @@ function totalLoad(start, end, area, seriesIndex) {
         }
 
         var values = [];
+        var l = timeSeries[0].Period[0].Point.length;
+        console.log('l', l, 'numberOfPoints', numberOfPoints);
         timeSeries[0].Period[0].Point.forEach(item => {
           values.push({
             x: time.unix() * 1000,
@@ -124,7 +126,7 @@ function load(start, end, area) {
 
         var timeSeries = result['GL_MarketDocument'].TimeSeries;
         var powerArray = parseTimeSeries(timeSeries, area, start, end);
-       totalLoad(start, end, area, powerArray.length).then(data => {
+        totalLoad(start, end, area, powerArray.length, powerArray[0].values.length).then(data => {
           console.log('startend', start, end, area);
           powerArray.push(data);
           /*
