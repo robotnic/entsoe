@@ -2,38 +2,6 @@
 //const NodeCache = require( "node-cache" );
 //const myCache = new NodeCache();
 
-var cacheManager = require('cache-manager');
-var myCache = cacheManager.caching({store: 'memory', max: 100, ttl: 10/*seconds*/});
-
-/*
-//var cacheManager = require('cache-manager');
-//var mongoStore = require('cache-manager-mongodb');
-
-var myCache = cacheManager.caching({
-    store : mongoStore,
-    uri : "mongodb://127.0.0.1:27017/nodeCacheDb",
-    options : {
-      collection : "cacheManager",
-      compression : false,
-      poolSize : 5,
-      autoReconnect: true
-    }
-  });
-*/
-
-/*
-const { Client } = require('pg');
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
-
-client.connect();
-
-client.query('CREATE TABLE IF NOT EXISTS keyvalue (key VARCHAR(255) NOT NULL PRIMARY KEY, value json NOT NULL')
-*/
-
 var myCache = require('./pgcache');
 
 

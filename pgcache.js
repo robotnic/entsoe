@@ -1,7 +1,11 @@
 const { Client } = require('pg');
 
+const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://pgcache:pgcache@localhost/pgcache'
+
+console.log('DATABASE_URL', DATABASE_URL);
+
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: DATABASE_URL,
   ssl: false,
 });
 console.log('going to connect to postgres');

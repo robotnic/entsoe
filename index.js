@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var power = require('./power');
+var price = require('./price');
 var installed = require('./installed');
 var filllevel = require('./filllevel');
 var statistics = require('./statistics');
@@ -67,6 +68,29 @@ app.get('/api/generated', function(req, res) {
     console.log(delta + ' ms');
   })
 });
+
+app.get('/api/price', function(req, res) {
+  var startTime = new Date().getTime();
+  var country = req.query.area;
+  var start = req.query.start;
+  var end = req.query.end;
+  var refresh = req.query.refresh;
+
+  var hash = 'price-' + country + '-' + start + '-' + end;
+console.log(hash);
+  cache.get(hash, price.load,[start, end, country], refresh === 'true').then(function(charts){
+    //var etag = req.headers['if-none-match']
+    if (charts) { 
+      var md = md5(charts);
+      res.set('etag', md);
+    }
+    res.send(charts);
+    var delta = new Date().getTime() - startTime;
+    console.log(delta + ' ms');
+  })
+});
+
+
 
 app.get('/api/installed/:country', function(req, res) {
   // installed.load(req.params.country).then(function(installed){
