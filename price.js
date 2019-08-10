@@ -51,9 +51,13 @@ function load(start, end, area) {
     } else {
       parseString(xml, function(err, result) {
 //console.log(JSON.stringify(result, null, 2));
-        var timeSeries = result['Publication_MarketDocument'].TimeSeries;
-        var powerArray = parseTimeSeries(timeSeries, area, start, end);
-	q.resolve(powerArray);
+	try {
+		var timeSeries = result['Publication_MarketDocument'].TimeSeries;
+		var powerArray = parseTimeSeries(timeSeries, area, start, end);
+		q.resolve(powerArray);
+	} catch (e) {
+		q.resolve(e, result);
+	}
       });
     }
   })
