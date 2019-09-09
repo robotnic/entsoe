@@ -95,7 +95,7 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
           seriesIndex: seriesIndex++,
           resolution: resolution
         }
-        console.log(JSON.stringify(power, null, 2));
+        //console.log(JSON.stringify(power, null, 2));
         q.resolve(power);
       })
     }
