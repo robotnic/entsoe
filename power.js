@@ -92,7 +92,7 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
           values: values,
           seriesIndex: seriesIndex++,
           resolution: resolution,
-          url: url.replace(token,'.... entsoe api token .....');
+          url: url.replace(token,'.... entsoe api token .....')
         }
         //console.log(JSON.stringify(power, null, 2));
         q.resolve(power);
