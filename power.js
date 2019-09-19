@@ -92,7 +92,7 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
           values: values,
           seriesIndex: seriesIndex++,
           resolution: resolution,
-          url: url.replace(token,'.... entsoe api token .....')
+          source: url.replace(token,'.... entsoe api token .....')
         }
         //console.log(JSON.stringify(power, null, 2));
         q.resolve(power);
@@ -137,7 +137,7 @@ function load(start, end, area) {
         }
 
         var timeSeries = result['GL_MarketDocument'].TimeSeries;
-        var powerArray = parseTimeSeries(timeSeries, area, start, end);
+        var powerArray = parseTimeSeries(timeSeries, area, start, end, url);
         totalLoad(start, end, area, powerArray.length, powerArray[0].values.length).then(data => {
           powerArray.push(data);
           q.resolve(powerArray);
@@ -148,7 +148,7 @@ function load(start, end, area) {
   return q.promise;
 }
 
-function parseTimeSeries(timeSeries, area, start, end) {
+function parseTimeSeries(timeSeries, area, start, end, url) {
   var all = {};
   var resolution = null;
   timeSeries.forEach(period => {
@@ -179,6 +179,7 @@ function parseTimeSeries(timeSeries, area, start, end) {
   var charts = [];
   for (let a in all) {
     var chart = makeChart(a, all[a], charts.length, area, start, end, resolution);
+    chart.source = url.replace(token,'.... entsoe api token .....')
     charts.push(chart);
   }
   return charts;
