@@ -28,7 +28,7 @@ module.exports = {
 }
 
 
-var url = 'https://transparency.entsoe.eu/api?securityToken=68aa46a3-3b1b-4071-ac6b-4372830b114f&documentType=A68&processType=A33&In_Domain=10YAT-APG------L&periodStart=201806090000&periodEnd=201806100000'
+// var url = 'https://transparency.entsoe.eu/api?securityToken=68aa46a3-3b1b-4071-ac6b-4372830b114f&documentType=A68&processType=A33&In_Domain=10YAT-APG------L&periodStart=201806090000&periodEnd=201806100000'
 
 
 
@@ -87,6 +87,7 @@ function load(year, country){
             country: country,
             periodStart: start.format('YYYYMMDDHHmm'),
             periodEnd: end,
+            source: url.replace(setup.token,''),
             values: values
           }
           q.resolve(chart);
