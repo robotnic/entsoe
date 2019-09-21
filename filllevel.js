@@ -57,7 +57,7 @@ function load(year, country){
       'Content-type': 'application/json'
     }
   };
-
+	console.log(url);
   request.get(url, function(error, response, xml) {
     if (error) {
       console.log(error);
@@ -87,7 +87,7 @@ function load(year, country){
             country: country,
             periodStart: start.format('YYYYMMDDHHmm'),
             periodEnd: end,
-            source: url.replace(setup.token,''),
+            source: url.replace(setup.token,'...entsoe token...'),
             values: values
           }
           q.resolve(chart);
