@@ -113,7 +113,7 @@ app.get('/api/filllevel/:year', function(req, res) {
 app.get('/api/filllevel/:country/:year', function(req, res) {
   var year = parseInt(req.params.year)
   var country = req.params.country
-  var refresh = req.query.fresh;
+  var refresh = req.query.refresh;
   var hash = 'filllevel-' + country +'-' +year;
   cache.get(hash, filllevel.load, [year, country], refresh === 'true').then(function(level){
     res.send(level);

@@ -88,6 +88,7 @@ function load(year, country){
             periodStart: start.format('YYYYMMDDHHmm'),
             periodEnd: end,
             source: url.replace(setup.token,'...entsoe token...'),
+            cachedate: new Date(),
             values: values
           }
           q.resolve(chart);
