@@ -23,12 +23,12 @@ module.exports = {
 function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
   var q = $q.defer();
   var params = {
-    securityToken: token,
     documentType: 'A65', // 'A75',
     processType: 'A16',
     outBiddingZone_Domain: countries[area],
     periodStart: start,
-    periodEnd: end
+    periodEnd: end,
+    securityToken: token
   };
   var url = 'https://transparency.entsoe.eu/api?' + querystring.stringify(params);
   console.log(url);
@@ -106,13 +106,13 @@ function load(start, end, area) {
   var q = $q.defer();
   var hash = 'generated' + start + '-' + end + '-' + area;
   var params = {
-    securityToken: token,
     documentType: 'A75', // 'A75',
     processType: 'A16',
     in_Domain: countries[area],
     outBiddingZone_Domain: countries[area],
     periodStart: start,
-    periodEnd: end
+    periodEnd: end,
+    securityToken: token
   }
 
   var url = 'https://transparency.entsoe.eu/api?' + querystring.stringify(params);
