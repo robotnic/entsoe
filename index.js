@@ -108,6 +108,10 @@ app.get('/api/filllevel/:year', function(req, res) {
   var hash = 'filllevel-' + country
   var refresh = req.query.refresh;
   cache.get(hash, filllevel.load,[year], refresh === 'true').then(function(installed){
+    if (installed) { 
+      var md = md5(charts);
+      res.set('etag', md);
+    }
     res.send(installed);
   })
 });
