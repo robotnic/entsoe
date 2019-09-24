@@ -105,8 +105,10 @@ app.get('/api/installed/:country', function(req, res) {
 
 app.get('/api/filllevel/:year', function(req, res) {
   var year = parseInt(req.params.year)
-  filllevel.load(year).then(function(level){
-    res.send(level);
+  var hash = 'filllevel-' + country
+  var refresh = req.query.refresh;
+  cache.get(hash, filllevel.load,[year], refresh === 'true').then(function(installed){
+    res.send(installed);
   })
 });
 
