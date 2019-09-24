@@ -93,7 +93,8 @@ function load(year, country){
           }
           q.resolve(chart);
         } else {
-          q.resolve(null);
+          console.log(JSON.stringify(data, null, 2));
+          q.resolve(data);
         }
       })
     }
