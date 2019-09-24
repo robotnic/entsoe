@@ -10,7 +10,7 @@ module.exports = {
 
 function load(country, year) {
   var q = $q.defer();
-  var filename = './data/' + country + '.XLSX';
+  var filename = __dirname + '/data/' + country + '.XLSX';
   fs.readFile(filename, function(err, data) {
     if (err) {
       console.log(err);

@@ -60,7 +60,7 @@ app.get('/api/generated', function(req, res) {
   cache.get(hash, power.load,[start, end, country], refresh === 'true').then(function(charts){
     //var etag = req.headers['if-none-match']
     if (charts) { 
-      var md = md5(charts);
+      var md = md5(JSON.stringify(charts));
       res.set('etag', md);
     }
     res.send(charts);
