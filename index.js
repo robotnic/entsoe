@@ -66,6 +66,8 @@ app.get('/api/generated', function(req, res) {
     res.send(charts);
     var delta = new Date().getTime() - startTime;
     console.log(delta + ' ms');
+  }, err => {
+    res.status(404).send(err);
   })
 });
 
@@ -81,7 +83,7 @@ console.log(hash);
   cache.get(hash, price.load,[start, end, country], refresh === 'true').then(function(charts){
     //var etag = req.headers['if-none-match']
     if (charts) { 
-      var md = md5(charts);
+      var md = md5(JSON.stringifiy(charts));
       res.set('etag', md);
     }
     res.send(charts);
@@ -109,7 +111,7 @@ app.get('/api/filllevel/:year', function(req, res) {
   var refresh = req.query.refresh;
   cache.get(hash, filllevel.load,[year], refresh === 'true').then(function(installed){
     if (installed) { 
-      var md = md5(charts);
+      var md = md5(JSON.stringify(installed));
       res.set('etag', md);
     }
     res.send(installed);
@@ -122,7 +124,13 @@ app.get('/api/filllevel/:country/:year', function(req, res) {
   var refresh = req.query.refresh;
   var hash = 'filllevel-' + country +'-' +year;
   cache.get(hash, filllevel.load, [year, country], refresh === 'true').then(function(level){
+    if (level) { 
+      var md = md5(JSON.stringify(level));
+      res.set('etag', md);
+    }
     res.send(level);
+  }, e => {
+     res.status(404).send(e);
   })
 });
 

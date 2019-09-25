@@ -45,7 +45,15 @@ function get(hash, callback, params, refresh) {
     callback.apply(this, params).then(data => {
       myCache.set(hash, data);
       if(!data) data = null;
-      q.resolve(data);
+console.log('thedata', data);
+        if(data['Acknowledgement_MarketDocument'] && data['Acknowledgement_MarketDocument'].Reason) {
+		console.log('herbscht is');
+	      q.reject(data);
+	} else {
+	      q.resolve(data);
+	};
+    }, e => {
+      q.reject(e);
     })
   }
 

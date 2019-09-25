@@ -42,10 +42,17 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
 
   request.get(url, function(error, response, xml) {
     if (error) {
-      console.log(error);
+      console.log('error', error);
+      q.reject(error);
     } else {
       parseString(xml, function(err, result) {
         console.log(err);
+
+	if (err) {
+	  q.reject(err);
+          return;
+        } 
+ 
         var timeSeries = result['GL_MarketDocument'].TimeSeries
         var pointArray = timeSeries[0].Period[0].Point;
         var time = timeSeries[0].Period[0].timeInterval[0].start[0];
@@ -128,11 +135,11 @@ function load(start, end, area) {
   request.get(url, function(error, response, xml) {
     if (error) {
       console.log(error);
-      q.resolve(null);
+      q.reject(error);
     } else {
       parseString(xml, function(err, result) {
         if (!result['GL_MarketDocument']) {
-          q.resolve(result["Acknowledgement MarketDocument"]);
+          q.reject(result);
           return;
         }
 
