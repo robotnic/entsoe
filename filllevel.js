@@ -37,7 +37,7 @@ function load(year, country){
   var end = (year +1) + '01010000';
   var q = $q.defer();
 
-  console.log('--------------', country, countries[country]);
+  console.log('-------x-------', country, countries[country]);
 
   var params = {
     securityToken: setup.token,
