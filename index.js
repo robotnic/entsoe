@@ -5,7 +5,7 @@ var price = require('./price');
 var installed = require('./installed');
 var filllevel = require('./filllevel');
 var statistics = require('./statistics');
-var consumtion = require('./consumtion');
+var consumption = require('./consumption');
 var cache = require('./cache');
 var area = require('./area');
 var conf = require('./config/default.json');
@@ -35,13 +35,13 @@ app.get('/api/area', function(req, res) {
 });
 
 
-app.get('/api/consumtion/:country/:year', function(req, res) {
+app.get('/api/consumption/:country/:year', function(req, res) {
 
   var country = req.params.country;
   var year = req.params.year;
   var refresh = req.query.refresh;
   var hash = 'cosumtion-' + country + '_' + year;
-  cache.get(hash, consumtion.load,[country, year], refresh === 'true').then(function(stat){
+  cache.get(hash, consumption.load,[country, year], refresh === 'true').then(function(stat){
     // consumtion.load(req.params.country, req.params.year).then(function(stat){
     res.send(stat);
   })
