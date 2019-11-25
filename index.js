@@ -17,7 +17,7 @@ var app = express();
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
-  res.send('Welcome to ENTSOE to json converter ' + process.env.DATABASE_URL);
+  res.send('Welcome to ENTSOE to json converter ' + JSON.stringify(process.env));
 });
 
 app.get('/api/default', function(req, res) {
