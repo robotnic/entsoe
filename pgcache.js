@@ -26,7 +26,6 @@ module.exports = {
   set: set,
 }
 
-
 function get(key, callback) {
   console.log('GET');
   client.query('SELECT * from keyvalue where key = $1', [key], (err, res) => {
