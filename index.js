@@ -102,6 +102,7 @@ app.get('/api/installed/:country', function(req, res) {
   var country = req.params.country;
   var refresh = req.query.refresh;
   var hash = 'installed-' + country
+  console.log('installed', country);
   cache.get(hash, installed.load,[country], refresh === 'true').then(function(installed){
     res.send(installed);
   })
