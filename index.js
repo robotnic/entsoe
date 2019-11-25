@@ -11,7 +11,7 @@ var area = require('./area');
 var conf = require('./config/default.json');
 var md5 = require('md5');
 
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 8080
 var app = express();
 app.use(bodyParser.json());
 
