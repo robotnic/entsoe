@@ -17,7 +17,9 @@ var app = express();
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
-  res.send(JSON.stringify(process.env, null, 2));
+  console.log(JSON.stringify(process.env, null, 2));
+  res.send('done');
+
 });
 
 app.get('/api/default', function(req, res) {
