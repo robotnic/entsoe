@@ -1,7 +1,7 @@
 const { Client } = require('pg');
 
 //const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://pgcache:pgcache@localhost/pgcache'
-const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://bernhard:BukBukBuk1$@http://entsoedb.postgres.database.azure.com/pgcache'
+const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://bernhard:BukBukBuk1$@http://entsoedb.postgres.database.azure.com/pgcache';
 
 console.log('DATABASE_URL', DATABASE_URL);
 
