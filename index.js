@@ -18,7 +18,8 @@ app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
   console.log(JSON.stringify(process.env, null, 2));
-  res.send('done');
+  res.send(JSON.stringify(process.env, null, 2));
+//  res.send('done');
 
 });
 
