@@ -1,13 +1,13 @@
 const { Client } = require('pg');
 
 //const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://pgcache:pgcache@localhost/pgcache'
-const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://bernhard:BukBukBuk1$@http://entsoedb.postgres.database.azure.com/pgcache';
+const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://bernhard@entsoedb:BukBukBukBuk1$@entsoedb.postgres.database.azure.com/pgcache';
 
 console.log('DATABASE_URL', DATABASE_URL);
 
 const client = new Client({
   connectionString: DATABASE_URL,
-  ssl: false,
+  ssl: true,
 });
 console.log('going to connect to postgres');
 client.connect();
@@ -47,3 +47,6 @@ function set(key, value) {
   }
 }
 
+client.on('error', function(){
+  console.log(arguments);
+});

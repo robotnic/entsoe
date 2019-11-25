@@ -12,7 +12,7 @@ var conf = require('./config/default.json');
 var md5 = require('md5');
 
 
-const PORT = process.env.PORT || 9000
+const PORT = process.env.PORT || 6000
 var app = express();
 app.use(bodyParser.json());
 
