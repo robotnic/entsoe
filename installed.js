@@ -55,6 +55,7 @@ function loadAll(area) {
 }
 
 function load(year, area){
+  console.log('inside', year, area);
   var start = year + '06090000';
   var end = year + '06090000';
   var q = $q.defer();
