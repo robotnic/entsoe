@@ -53,6 +53,7 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
           return;
         } 
  
+        if(result['GL_MarketDocument']) {
         var timeSeries = result['GL_MarketDocument'].TimeSeries
         var pointArray = timeSeries[0].Period[0].Point;
         var time = timeSeries[0].Period[0].timeInterval[0].start[0];
@@ -103,6 +104,9 @@ function totalLoad(start, end, area, seriesIndex, numberOfPoints) {
         }
         //console.log(JSON.stringify(power, null, 2));
         q.resolve(power);
+        } else {
+          q.reject('not found');
+        }
       })
     }
   });
