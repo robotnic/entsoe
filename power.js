@@ -152,6 +152,8 @@ function load(start, end, area) {
         totalLoad(start, end, area, powerArray.length, powerArray[0].values.length).then(data => {
           powerArray.push(data);
           q.resolve(powerArray);
+        }, e => {
+          q.reject(e); 
         })
       });
     }
