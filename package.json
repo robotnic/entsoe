@@ -8,7 +8,7 @@
     "express": "^4.17.1",
     "md5": "^2.2.1",
     "moment": "^2.24.0",
-    "node-libxml": "^3.2.5",
+    "node-libxml": "^3.2.4",
     "pg": "^7.11.0",
     "q": "^1.5.1",
     "request": "^2.88.0",
@@ -23,8 +23,8 @@
   },
   "author": "",
   "license": "ISC",
-  "engine":{
-    "npm": "5.7.1",
+  "engine": {
+    "npm": "6.9.0",
     "node": "10.x"
   }
 }
