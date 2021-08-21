@@ -45,6 +45,7 @@ app.get('/api/consumption/:country/:year', function(req, res) {
   var hash = 'cosumtion-' + country + '_' + year;
   cache.get(hash, consumption.load,[country, year], refresh === 'true').then(function(stat){
     // consumtion.load(req.params.country, req.params.year).then(function(stat){
+    res.set('cache-control', 'private, max-age=' + 60 * 60 * 24 * 7);
     res.send(stat);
   })
 });
@@ -105,6 +106,7 @@ app.get('/api/installed/:country', function(req, res) {
   console.log('installed', country);
   cache.get(hash, installed.load,[country], refresh === 'true').then(function(installed){
     res.send(installed);
+    res.set('cache-control', 'private, max-age=' + 60 * 60 * 24 * 7);
   })
 });
 
