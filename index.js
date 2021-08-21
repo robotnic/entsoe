@@ -64,6 +64,7 @@ app.get('/api/generated', function(req, res) {
     if (charts) { 
       var md = md5(JSON.stringify(charts));
       res.set('etag', md);
+      res.set('cache-control', 'private, max-age=' 60 * 60 * 24 * 7);
     }
     res.send(charts);
     var delta = new Date().getTime() - startTime;
