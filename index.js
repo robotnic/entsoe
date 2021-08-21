@@ -105,8 +105,8 @@ app.get('/api/installed/:country', function(req, res) {
   var hash = 'installed-' + country
   console.log('installed', country);
   cache.get(hash, installed.load,[country], refresh === 'true').then(function(installed){
-    res.send(installed);
     res.set('cache-control', 'private, max-age=' + 60 * 60 * 24 * 7);
+    res.send(installed);
   })
 });
 
